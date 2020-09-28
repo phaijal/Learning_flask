@@ -7,4 +7,19 @@ cluster = MongoClient("mongodb+srv://akash:akash@cluster0.zqitl.mongodb.net/<dbn
 db = cluster["dbname"]
 collection = db["coll"]
 
-collection.insert_one({"_id": 0, "name": "akash singh"})
+#collection.insert_one({"_id": 1, "name": "sadff asfdasf"})
+
+app = Flask(__name__)
+
+
+@app.route("/")
+def getval():
+    all_names = list(collection.find({}))
+    out = f"names: "
+    for n in all_names:
+        s = n["name"]
+        out += f"{s} "
+    return out
+
+if __name__ == "__main__":
+    app.run()
