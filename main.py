@@ -34,12 +34,10 @@ def addname(name):
 
 @app.route("/addval", methods=["POST"])
 def addval():
-    request_payload = request.json
+    request_payload = request.get_json(force=True)
     print(request_payload)
-    print("hjh")
-  #  inf = request_payload['info']
-  #  collection.insert_one({"name": "ttt"})
+    collection.insert_one({"name": request_payload["name"]})
     return f"added"
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000, host="0.0.0.0")
+    app.run()
